@@ -1,13 +1,13 @@
-package com.asquare.demo;
+package com.asquare;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class AppWebservicesApplication {
+public class MobileAppWsApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(AppWebservicesApplication.class, args);
+		SpringApplication.run(MobileAppWsApplication.class, args);
 	}
 
 }
