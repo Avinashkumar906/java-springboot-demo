@@ -1,10 +1,19 @@
 package com.asquare.controller;
 
+import com.asquare.dto.UserDtailsDto;
+import com.asquare.model.UserDetailRequest;
+import com.asquare.model.UserDetailResponse;
+import com.asquare.service.UserService;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/user")
 public class User {
+
+	@Autowired
+	private UserService userService;
 
 	@GetMapping
 	public String getUser() {
@@ -12,8 +21,17 @@ public class User {
 	}
 
 	@PostMapping
-	public String postUser() {
-		return "Post user function called!";
+	public UserDetailResponse postUser(@RequestBody UserDetailRequest user) {
+
+		UserDtailsDto userDtailsDto = new UserDtailsDto();
+		BeanUtils.copyProperties(user, userDtailsDto);
+
+		UserDtailsDto savedUser = userService.createUser(userDtailsDto);
+
+		UserDetailResponse userDetailResponse = new UserDetailResponse();
+		BeanUtils.copyProperties(savedUser,userDetailResponse);
+
+		return userDetailResponse;
 	}
 
 	@PutMapping
